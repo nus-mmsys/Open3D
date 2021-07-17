@@ -43,11 +43,9 @@ namespace kernel {
 
 template <typename func_t>
 static void LaunchUnaryEWKernel(const Indexer& indexer, const func_t& func) {
-    cpu_launcher::ParallelFor(
-            indexer.NumWorkloads(), cpu_launcher::SMALL_OP_GRAIN_SIZE,
-            [&indexer, &func](int64_t i) {
-                func(indexer.GetInputPtr(0, i), indexer.GetOutputPtr(i));
-            });
+    ParallelForGrained(indexer.NumWorkloads(), [&indexer, &func](int64_t i) {
+        func(indexer.GetInputPtr(0, i), indexer.GetOutputPtr(i));
+    });
 }
 
 template <typename src_t, typename dst_t>
@@ -165,11 +163,9 @@ void CopyCPU(const Tensor& src, Tensor& dst) {
         DISPATCH_DTYPE_TO_TEMPLATE_WITH_BOOL(dst_dtype, [&]() {
             scalar_t scalar_element = src.To(dst_dtype).Item<scalar_t>();
             scalar_t* dst_ptr = static_cast<scalar_t*>(dst.GetDataPtr());
-            cpu_launcher::ParallelFor(
-                    num_elements, cpu_launcher::SMALL_OP_GRAIN_SIZE,
-                    [&](int64_t workload_idx) {
-                        dst_ptr[workload_idx] = scalar_element;
-                    });
+            ParallelForGrained(num_elements, [&](int64_t workload_idx) {
+                dst_ptr[workload_idx] = scalar_element;
+            });
         });
     } else {
         Indexer indexer({src}, dst, DtypePolicy::NONE);
