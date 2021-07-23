@@ -1,3 +1,38 @@
+# Patch: Varying Point Size
+
+- The `PointCloud` class has been augmented with a `std::vector<float> size_` instance attribute
+- A new vertex shader `VarSizeVertexShader` that set `gl_PointSize` for every point is added 
+- These are linked via the class `VarSizePointShader`, which binds the `size_` array to the shader
+- The C++ vector `size_` can be set via Python via `pybind11`, by setting the `size` attribute in Python to a 1D numpy array of floats.
+
+As an example, the following render the left half of the model with point size 1, right half with point size 10:
+```
+center = pcd.get_center()
+def points_to_size(point):
+    if point[0] < center[0]:
+        return 1
+    else:
+        return 10
+
+pcd.sizes = np.array(list(map(points_to_size, pcd.points)))
+
+```
+
+To use this patched version of Open3D in a project, follow the Open3D instructions to compile.  Then run the following the create pip package:
+```
+make pip-package
+```
+
+After that, run to install the patched version of Open3D.
+```
+pip install -e <path to build/lib/python_package>
+```
+
+After this point, running `import open3d` from a Python script should import the patched version of Open3D.
+
+
+<hr>
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/intel-isl/Open3D/master/docs/_static/open3d_logo_horizontal.png" width="320" />
 </p>
