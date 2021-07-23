@@ -325,7 +325,7 @@ bool Visualizer::AddGeometry(
         return false;
     } else if (geometry_ptr->GetGeometryType() ==
                geometry::Geometry::GeometryType::PointCloud) {
-        renderer_ptr = std::make_shared<glsl::PointCloudRenderer>();
+        renderer_ptr = std::make_shared<glsl::VarSizePointCloudRenderer>();
         if (!renderer_ptr->AddGeometry(geometry_ptr)) {
             return false;
         }

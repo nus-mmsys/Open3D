@@ -94,6 +94,11 @@ public:
         return points_.size() > 0 && colors_.size() == points_.size();
     }
 
+    /// Returns `true` if the point cloud contains sizes.
+    bool HasSizes() const {
+        return points_.size() > 0 && sizes_.size() == points_.size();
+    }
+
     /// Normalize point normals to length 1.
     PointCloud &NormalizeNormals() {
         for (size_t i = 0; i < normals_.size(); i++) {
@@ -378,6 +383,8 @@ public:
     std::vector<Eigen::Vector3d> normals_;
     /// RGB colors of points.
     std::vector<Eigen::Vector3d> colors_;
+    /// Sizes of points.
+    std::vector<float> sizes_;
 };
 
 }  // namespace geometry

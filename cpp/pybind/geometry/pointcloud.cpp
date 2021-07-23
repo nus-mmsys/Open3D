@@ -63,6 +63,8 @@ void pybind_pointcloud(py::module &m) {
                  "Returns ``True`` if the point cloud contains point normals.")
             .def("has_colors", &PointCloud::HasColors,
                  "Returns ``True`` if the point cloud contains point colors.")
+            .def("has_sizes", &PointCloud::HasSizes,
+                 "Returns ``True`` if the point cloud contains sizes.")
             .def("normalize_normals", &PointCloud::NormalizeNormals,
                  "Normalize point normals to length 1.")
             .def("paint_uniform_color", &PointCloud::PaintUniformColor,
@@ -210,14 +212,18 @@ camera. Given depth value d at (u, v) image coordinate, the corresponding 3d poi
                            "``float64`` array of shape ``(num_points, 3)``, "
                            "use ``numpy.asarray()`` to access data: Points "
                            "normals.")
-            .def_readwrite(
-                    "colors", &PointCloud::colors_,
+            .def_readwrite( "colors", &PointCloud::colors_,
                     "``float64`` array of shape ``(num_points, 3)``, "
                     "range ``[0, 1]`` , use ``numpy.asarray()`` to access "
-                    "data: RGB colors of points.");
+                    "data: RGB colors of points.")
+            .def_readwrite("sizes", &PointCloud::sizes_,
+                           "``float64`` array of sizes ``(num_points, 1)``, "
+                           "use ``numpy.asarray()`` to access data: Points "
+                           "sizes.");
     docstring::ClassMethodDocInject(m, "PointCloud", "has_colors");
     docstring::ClassMethodDocInject(m, "PointCloud", "has_normals");
     docstring::ClassMethodDocInject(m, "PointCloud", "has_points");
+    docstring::ClassMethodDocInject(m, "PointCloud", "has_sizes");
     docstring::ClassMethodDocInject(m, "PointCloud", "normalize_normals");
     docstring::ClassMethodDocInject(
             m, "PointCloud", "paint_uniform_color",

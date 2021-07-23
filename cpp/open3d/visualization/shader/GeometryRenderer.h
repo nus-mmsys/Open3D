@@ -36,6 +36,7 @@
 #include "open3d/visualization/shader/Simple2DShader.h"
 #include "open3d/visualization/shader/SimpleBlackShader.h"
 #include "open3d/visualization/shader/SimpleShader.h"
+#include "open3d/visualization/shader/VarSizePointShader.h"
 #include "open3d/visualization/shader/TexturePhongShader.h"
 #include "open3d/visualization/shader/TextureSimpleShader.h"
 
@@ -95,6 +96,23 @@ public:
 
 protected:
     SimpleShaderForPointCloud simple_point_shader_;
+    PhongShaderForPointCloud phong_point_shader_;
+    NormalShaderForPointCloud normal_point_shader_;
+    SimpleBlackShaderForPointCloudNormal simpleblack_normal_shader_;
+};
+
+class VarSizePointCloudRenderer : public GeometryRenderer {
+public:
+    ~VarSizePointCloudRenderer() override {}
+
+public:
+    bool Render(const RenderOption &option, const ViewControl &view) override;
+    bool AddGeometry(
+            std::shared_ptr<const geometry::Geometry> geometry_ptr) override;
+    bool UpdateGeometry() override;
+
+protected:
+    VarSizePointShaderForPointCloud var_size_point_shader_;
     PhongShaderForPointCloud phong_point_shader_;
     NormalShaderForPointCloud normal_point_shader_;
     SimpleBlackShaderForPointCloudNormal simpleblack_normal_shader_;

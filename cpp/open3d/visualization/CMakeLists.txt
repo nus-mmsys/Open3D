@@ -12,6 +12,7 @@ target_sources(visualization PRIVATE
     shader/Simple2DShader.cpp
     shader/SimpleBlackShader.cpp
     shader/SimpleShader.cpp
+	shader/VarSizePointShader.cpp
     shader/TexturePhongShader.cpp
     shader/TextureSimpleShader.cpp
 )
@@ -119,6 +120,7 @@ open3d_add_encoded_shader(shader
     shader/glsl/SimpleBlackVertexShader.glsl
     shader/glsl/SimpleFragmentShader.glsl
     shader/glsl/SimpleVertexShader.glsl
+    shader/glsl/VarSizeVertexShader.glsl
     shader/glsl/TexturePhongFragmentShader.glsl
     shader/glsl/TexturePhongVertexShader.glsl
     shader/glsl/TextureSimpleFragmentShader.glsl
