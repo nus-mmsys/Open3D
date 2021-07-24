@@ -384,7 +384,7 @@ public:
     /// RGB colors of points.
     std::vector<Eigen::Vector3d> colors_;
     /// Sizes of points.
-    std::vector<float> sizes_;
+    std::vector<double> sizes_;
 };
 
 }  // namespace geometry

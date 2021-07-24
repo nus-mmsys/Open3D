@@ -50,7 +50,7 @@ typedef std::vector<Eigen::Vector4i, open3d::utility::Vector4i_allocator>
 PYBIND11_MAKE_OPAQUE(std::vector<int>);
 PYBIND11_MAKE_OPAQUE(std::vector<int64_t>);
 PYBIND11_MAKE_OPAQUE(std::vector<uint8_t>);
-// PYBIND11_MAKE_OPAQUE(std::vector<float>);
+PYBIND11_MAKE_OPAQUE(std::vector<float>);
 PYBIND11_MAKE_OPAQUE(std::vector<double>);
 PYBIND11_MAKE_OPAQUE(std::vector<Eigen::Vector3d>);
 PYBIND11_MAKE_OPAQUE(std::vector<Eigen::Vector3i>);

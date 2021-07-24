@@ -24,16 +24,16 @@
 // IN THE SOFTWARE.
 // ----------------------------------------------------------------------------
 
-#include "open3d/geometry/PointCloud.h"
 
 #include <vector>
+#include "pybind/docstring.h"
+#include "pybind/geometry/geometry.h"
+#include "pybind/geometry/geometry_trampoline.h"
 
 #include "open3d/camera/PinholeCameraIntrinsic.h"
 #include "open3d/geometry/Image.h"
 #include "open3d/geometry/RGBDImage.h"
-#include "pybind/docstring.h"
-#include "pybind/geometry/geometry.h"
-#include "pybind/geometry/geometry_trampoline.h"
+#include "open3d/geometry/PointCloud.h"
 
 namespace open3d {
 namespace geometry {

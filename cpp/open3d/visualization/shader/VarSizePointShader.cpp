@@ -199,7 +199,7 @@ bool VarSizePointShaderForPointCloud::PrepareBinding(
         colors[i] = color.cast<float>();
 
         if (pointcloud.HasSizes()) {
-            sizes[i] = pointcloud.sizes_[i];
+            sizes[i] = (float) pointcloud.sizes_[i];
         } else {
             sizes[i] = GLfloat(option.point_size_);
         }
