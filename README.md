@@ -1,9 +1,9 @@
 # Patch: Varying Point Size
 
-- The `PointCloud` class has been augmented with a `std::vector<float> size_` instance attribute
+- The `PointCloud` class has been augmented with a `std::vector<double> size_` instance attribute
 - A new vertex shader `VarSizeVertexShader` that set `gl_PointSize` for every point is added 
 - These are linked via the class `VarSizePointShader`, which binds the `size_` array to the shader
-- The C++ vector `size_` can be set via Python via `pybind11`, by setting the `size` attribute in Python to a 1D numpy array of floats.
+- The C++ vector `size_` can be set via Python via `pybind11`, by setting the `size` attribute in Python to a 1D numpy array of floats (but cast to `o3d.utility.DoubleVector`).
 
 As an example, the following render the left half of the model with point size 1, right half with point size 10:
 ```
@@ -14,7 +14,7 @@ def points_to_size(point):
     else:
         return 10
 
-pcd.sizes = np.array(list(map(points_to_size, pcd.points)))
+pcd.sizes = o3d.utility.DoubleVector(np.array(list(map(points_to_size, pcd.points))))
 
 ```
 
