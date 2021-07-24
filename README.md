@@ -18,6 +18,8 @@ pcd.sizes = o3d.utility.DoubleVector(np.array(list(map(points_to_size, pcd.point
 
 ```
 
+If `pcd.sizes` is not initialized, `visualizer.get_render_option().point_size` will be used instead.
+
 To use this patched version of Open3D in a project, follow the Open3D instructions to compile.  Then run the following the create pip package:
 ```
 make pip-package
